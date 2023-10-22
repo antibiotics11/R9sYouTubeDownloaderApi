@@ -23,7 +23,7 @@ class ApiConfig {
   /**
    * @const string API 서버의 소프트웨어 버전 정보
    */
-  public const VERSION  = "1.0.0";
+  public const VERSION  = "1.1.0";
 
   /**
    * @const string API 서버의 전역 타임존
@@ -39,6 +39,25 @@ class ApiConfig {
    * @const string 로그를 저장할 파일 경로
    */
   public const LOG_FILE = "/var/log/r9sapi.log";
+
+  /**
+   * @const mixed[] API 접근 인증 설정
+   */
+  public const AUTH_CONFIG = [
+
+    /**
+     * @const bool Basic 인증 활성화 여부
+     */
+    "BASIC_ENABLED" => false,
+
+    /**
+     * @const string[] Basic 인증 사용자 계정 목록
+     */
+    "BASIC_ACCOUNTS" => [
+      "test" => "1234"
+    ]
+
+  ];
 
 
   /**

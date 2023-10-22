@@ -95,7 +95,7 @@ class ApiServer {
     $videoController = new VideoController($responseFactory, $streamFactory, new VideoDownloader());
     $defaultController = new DefaultController($responseFactory, $streamFactory);
 
-    $authMiddleware = new AuthMiddleware($responseFactory, $streamFactory);
+    $authMiddleware = new AuthMiddleware($responseFactory, $streamFactory, $this->serverConfig["AUTH_CONFIG"]);
     $securityMiddleware = new SecurityMiddleware($responseFactory, $streamFactory, $this->serverConfig);
     $globalHeaderMiddleware = new GlobalHeaderMiddleware($this->serverConfig);
     $logMiddleware = new LogMiddleware();

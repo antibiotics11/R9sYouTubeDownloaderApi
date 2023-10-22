@@ -15,6 +15,9 @@ enum Header: string {
   case USER_AGENT                   = "User-Agent";
   case X_FORWARDED_FOR              = "X-Forwarded-For";
 
+  case WWW_AUTHENTICATE             = "WWW-Authenticate";
+  case AUTHORIZATION                = "Authorization";
+
   case ACCESS_CONTROL_ALLOW_ORIGIN  = "Access-Control-Allow-Origin";
   case ACCESS_CONTROL_ALLOW_METHODS = "Access-Control-Allow-Methods";
   case ACCESS_CONTROL_MAX_AGE       = "Access-Control-Max-Age";

@@ -19,8 +19,7 @@ final class LogMiddleware implements ControllerInterface {
     $requestPath     = $request->getUri()->getPath();
     $requestHeaders  = $request->getHeaders();
     $remoteAddress   = $requestHeaders[Header::X_FORWARDED_FOR->value][0] ?? $request->getServerParams()["REMOTE_ADDR"];
-    //$remoteUser    = 향후 인증 구현시 함께 구현, 현재 기본값은 "-".
-    $remoteUser      = "-";
+    $remoteUser      = $route->args->user ?? "-";
     $userAgent       = $requestHeaders[Header::USER_AGENT->value][0] ?? "-";
 
     $responseCode    = $response->getStatusCode();
