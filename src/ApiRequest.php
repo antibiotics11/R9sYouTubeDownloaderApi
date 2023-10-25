@@ -7,26 +7,28 @@ use JetBrains\PhpStorm\ExpectedValues;
 use JetBrains\PhpStorm\ArrayShape;
 use JetBrains\PhpStorm\ObjectShape;
 use InvalidArgumentException;
-use function trim, is_string, strtolower;
-use function filter_var;
+use function sprintf, trim, is_string, strlen, strtolower;
 use function in_array;
+use function filter_var;
 use function json_decode;
 use const FILTER_VALIDATE_URL;
 
 #[Immutable]
 final class ApiRequest {
 
+  private const REQUEST_FIELD   = [ "video_id", "video_url", "download_option" ];
+  private const DOWNLOAD_OPTION = [ "all", "info", "video", "audio" ];
+
   private function __construct(
     private readonly ?string $videoId,
     private readonly ?string $videoUrl,
-    #[ExpectedValues([ "all", "info", "video", "audio" ])]
+    #[ExpectedValues(self::DOWNLOAD_OPTION)]
     private readonly string $downloadOption = "all"
   ) {}
 
   /**
-   * @param stdClass|string $requestJson
+   * @param stdClass|string $requestObject
    * @return self
-   * @throws InvalidArgumentException
    */
   public static function fromJson(
     #[ObjectShape([
@@ -59,23 +61,34 @@ final class ApiRequest {
     array $requestArray
   ): self {
 
-    $videoId = $requestArray["video_id"] ?? null;
-    $videoUrl = $requestArray["video_url"] ?? null;
-    $downloadOption = $requestArray["download_option"] ?? "all";
-    $downloadOption = strtolower(trim($downloadOption));
+    $tmpArray = [];
+    foreach ($requestArray as $field => $value) {
+
+      $field = strtolower(trim($field));
+      if (!in_array($field, self::REQUEST_FIELD)) {
+        throw new InvalidArgumentException(sprintf("Invalid request field '%s'.", $field));
+      }
+
+      if (!is_string($value) && $value !== null) {
+        throw new InvalidArgumentException(sprintf("Invalid type for '%s'. It must be a string.", $field));
+      }
+      $value = trim($value);
+
+      $tmpArray[$field] = strlen($value) == 0 ? null : $value;
+    }
+
+    $videoId = $tmpArray[self::REQUEST_FIELD[0]] ?? null;
+    $videoUrl = $tmpArray[self::REQUEST_FIELD[1]] ?? null;
+    $downloadOption = $tmpArray[self::REQUEST_FIELD[2]] ?? "all";
 
     if ($videoId === null && $videoUrl === null) {
       throw new InvalidArgumentException("Either 'video_id' or 'video_url' is required.");
     }
-    if ($videoId !== null && !is_string($videoId)) {
-      throw new InvalidArgumentException("Invalid type for 'video_id'. It must be a string.");
-    } else if ($videoUrl !== null &&
-      (!is_string($videoUrl) || filter_var($videoUrl, FILTER_VALIDATE_URL) === false)
-    ) {
-      throw new InvalidArgumentException("Invalid 'video_url'. It must be a string of valid URL.");
+    if ($videoUrl !== null && filter_var($videoUrl, FILTER_VALIDATE_URL) === false) {
+      throw new InvalidArgumentException("Invalid 'video_url'. It must be a valid URL.");
     }
-    if (!in_array($downloadOption, [ "all", "info", "video", "audio" ])) {
-      throw new InvalidArgumentException("Invalid 'download_option'. It must be either 'all', 'info', 'video', or 'audio'.");
+    if (!in_array($downloadOption, self::DOWNLOAD_OPTION)) {
+      throw new InvalidArgumentException("Invalid 'download_option'.");
     }
 
     return new self($videoId, $videoUrl, $downloadOption);
