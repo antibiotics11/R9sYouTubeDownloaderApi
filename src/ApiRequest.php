@@ -1,9 +1,7 @@
 <?php
 
 namespace Room9Stone\YouTubeDownloader\Api;
-
 use stdClass;
-use aalfiann\JSON;
 use JetBrains\PhpStorm\Immutable;
 use JetBrains\PhpStorm\ExpectedValues;
 use JetBrains\PhpStorm\ArrayShape;
@@ -12,6 +10,7 @@ use InvalidArgumentException;
 use function trim, is_string, strtolower;
 use function filter_var;
 use function in_array;
+use function json_decode;
 use const FILTER_VALIDATE_URL;
 
 #[Immutable]
@@ -39,7 +38,7 @@ final class ApiRequest {
   ): self {
 
     if (is_string($requestObject)) {
-      $requestObject = (new JSON())->withSanitizer()->withTrim()->decode($requestObject);
+      $requestObject = json_decode($requestObject);
     }
 
     return self::fromArray((array)$requestObject);
