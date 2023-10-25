@@ -23,7 +23,7 @@ class ApiConfig {
   /**
    * @const string API 서버의 소프트웨어 버전 정보
    */
-  public const VERSION  = "1.1.0";
+  public const VERSION  = "1.1.1";
 
   /**
    * @const string API 서버의 전역 타임존
