@@ -3,9 +3,12 @@
 namespace Room9Stone\YouTubeDownloader\Api;
 use Stringable;
 use stdClass;
-use aalfiann\JSON;
 use JetBrains\PhpStorm\ExpectedValues;
 use JetBrains\PhpStorm\Immutable;
+use function json_encode;
+use const JSON_PRETTY_PRINT;
+use const JSON_UNESCAPED_UNICODE;
+use const JSON_UNESCAPED_SLASHES;
 
 #[Immutable]
 final class ApiResponse implements Stringable {
@@ -110,11 +113,11 @@ final class ApiResponse implements Stringable {
   }
 
   public function __toString(): string {
-    return (new JSON())->withTrim()->withSanitizer()->encode([
+    return json_encode([
       "status"  => $this->status,
       "data"    => $this->data,
       "message" => $this->message
-    ]);
+    ], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
   }
 
 };

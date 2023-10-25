@@ -3,9 +3,10 @@
 namespace Room9Stone\YouTubeDownloader\Api\YouTube\Entity;
 use Stringable;
 use YouTube\Models\VideoDetails as VideoDetailsModel;
-use aalfiann\JSON;
 use JetBrains\PhpStorm\ArrayShape;
 use JetBrains\PhpStorm\Immutable;
+use function json_encode;
+use const JSON_UNESCAPED_UNICODE;
 
 #[Immutable]
 final class VideoDetails extends VideoDetailsModel implements Stringable {
@@ -91,7 +92,7 @@ final class VideoDetails extends VideoDetailsModel implements Stringable {
    * @return string
    */
   public function __toString(): string {
-    return (new JSON())->withSanitizer()->withTrim()->encode($this->videoDetails);
+    return json_encode($this->videoDetails, JSON_UNESCAPED_UNICODE);
   }
 
 }
