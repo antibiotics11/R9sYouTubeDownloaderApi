@@ -19,7 +19,7 @@ return array(
     'React\\Dns\\' => array($vendorDir . '/react/dns/src'),
     'React\\Cache\\' => array($vendorDir . '/react/cache/src'),
     'React\\Async\\' => array($vendorDir . '/react/async/src'),
-    'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src', $vendorDir . '/psr/http-factory/src'),
+    'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-factory/src', $vendorDir . '/psr/http-message/src'),
     'JetBrains\\PhpStorm\\' => array($vendorDir . '/jetbrains/phpstorm-attributes/src'),
     'HttpSoft\\ServerRequest\\' => array($vendorDir . '/httpsoft/http-server-request/src'),
     'HttpSoft\\Response\\' => array($vendorDir . '/httpsoft/http-response/src'),
