@@ -76,7 +76,6 @@ class ApiServer {
       new StreamingRequestMiddleware(),
       new LimitConcurrentRequestsMiddleware(1000),
       new RequestBodyBufferMiddleware(512),
-      new RequestBodyParserMiddleware(),
       [ $this, "handle" ]
     );
 
