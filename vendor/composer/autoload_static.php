@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit47a945c80b1c8fa0fcd6bd217a9587a0
+class ComposerStaticInit5731d70f7daba58d690523ab2395b731
 {
     public static $files = array (
         'ad155f8f1cf0d418fe49e248db8c661b' => __DIR__ . '/..' . '/react/promise/src/functions_include.php',
@@ -13,10 +13,6 @@ class ComposerStaticInit47a945c80b1c8fa0fcd6bd217a9587a0
     );
 
     public static $prefixLengthsPsr4 = array (
-        'a' => 
-        array (
-            'aalfiann\\' => 9,
-        ),
         'Y' => 
         array (
             'YouTube\\' => 8,
@@ -71,10 +67,6 @@ class ComposerStaticInit47a945c80b1c8fa0fcd6bd217a9587a0
     );
 
     public static $prefixDirsPsr4 = array (
-        'aalfiann\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/aalfiann/json-class-php/src',
-        ),
         'YouTube\\' => 
         array (
             0 => __DIR__ . '/..' . '/athlon1600/youtube-downloader/src',
@@ -129,8 +121,8 @@ class ComposerStaticInit47a945c80b1c8fa0fcd6bd217a9587a0
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-factory/src',
-            1 => __DIR__ . '/..' . '/psr/http-message/src',
+            0 => __DIR__ . '/..' . '/psr/http-message/src',
+            1 => __DIR__ . '/..' . '/psr/http-factory/src',
         ),
         'JetBrains\\PhpStorm\\' => 
         array (
@@ -181,9 +173,9 @@ class ComposerStaticInit47a945c80b1c8fa0fcd6bd217a9587a0
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit47a945c80b1c8fa0fcd6bd217a9587a0::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit47a945c80b1c8fa0fcd6bd217a9587a0::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit47a945c80b1c8fa0fcd6bd217a9587a0::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit5731d70f7daba58d690523ab2395b731::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit5731d70f7daba58d690523ab2395b731::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit5731d70f7daba58d690523ab2395b731::$classMap;
 
         }, null, ClassLoader::class);
     }

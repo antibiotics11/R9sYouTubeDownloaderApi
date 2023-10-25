@@ -6,7 +6,6 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'aalfiann\\' => array($vendorDir . '/aalfiann/json-class-php/src'),
     'YouTube\\' => array($vendorDir . '/athlon1600/youtube-downloader/src'),
     'Tnapf\\Router\\' => array($vendorDir . '/tnapf/router/src'),
     'Tests\\Tnapf\\Router\\' => array($vendorDir . '/tnapf/router/tests'),
@@ -20,7 +19,7 @@ return array(
     'React\\Dns\\' => array($vendorDir . '/react/dns/src'),
     'React\\Cache\\' => array($vendorDir . '/react/cache/src'),
     'React\\Async\\' => array($vendorDir . '/react/async/src'),
-    'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-factory/src', $vendorDir . '/psr/http-message/src'),
+    'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src', $vendorDir . '/psr/http-factory/src'),
     'JetBrains\\PhpStorm\\' => array($vendorDir . '/jetbrains/phpstorm-attributes/src'),
     'HttpSoft\\ServerRequest\\' => array($vendorDir . '/httpsoft/http-server-request/src'),
     'HttpSoft\\Response\\' => array($vendorDir . '/httpsoft/http-response/src'),
