@@ -1,7 +1,6 @@
 <?php
 
 namespace Room9Stone\YouTubeDownloader\Api\Http;
-use Tnapf\Router\Routing\Methods;
 
 /**
  * API 서버가 직접 처리하는 HTTP 메소드 목록
@@ -10,9 +9,9 @@ use Tnapf\Router\Routing\Methods;
  */
 enum Method: string {
 
-  case GET  = Methods::GET;
-  case POST = Methods::POST;
+  case GET  = "GET";
+  case POST = "POST";
 
-  public const ALL = [ Methods::GET, Methods::POST ];
+  public const ALL = [ "GET", "POST" ];
 
 };
