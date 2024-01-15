@@ -6,8 +6,8 @@ namespace HttpSoft\Message;
 
 use InvalidArgumentException;
 use RuntimeException;
+use Throwable;
 
-use function array_key_exists;
 use function fclose;
 use function feof;
 use function fopen;
@@ -19,6 +19,8 @@ use function fwrite;
 use function get_resource_type;
 use function is_resource;
 use function is_string;
+use function restore_error_handler;
+use function set_error_handler;
 use function stream_get_contents;
 use function stream_get_meta_data;
 use function strpos;
@@ -89,13 +91,15 @@ trait StreamTrait
      * Closes the stream and any underlying resources.
      *
      * @return void
-     * @psalm-suppress PossiblyNullArgument
      */
     public function close(): void
     {
         if ($this->resource) {
             $resource = $this->detach();
-            fclose($resource);
+
+            if (is_resource($resource)) {
+                fclose($resource);
+            }
         }
     }
 
@@ -321,19 +325,31 @@ trait StreamTrait
      *
      * @return string
      * @throws RuntimeException if unable to read or an error occurs while reading.
-     * @psalm-suppress PossiblyNullArgument
      */
     public function getContents(): string
     {
+        if (!$this->resource) {
+            throw new RuntimeException('No resource available. Cannot read.');
+        }
+
         if (!$this->isReadable()) {
             throw new RuntimeException('Stream is not readable.');
         }
 
-        if (($result = stream_get_contents($this->resource)) === false) {
-            throw new RuntimeException('Error reading stream.');
-        }
+        $exception = null;
+        $message = 'Unable to read stream contents';
 
-        return $result;
+        set_error_handler(static function (int $errno, string $errstr) use (&$exception, $message) {
+            throw $exception = new RuntimeException("$message: $errstr");
+        });
+
+        try {
+            return stream_get_contents($this->resource);
+        } catch (Throwable $e) {
+            throw $e === $exception ? $e : new RuntimeException("$message: {$e->getMessage()}", 0, $e);
+        } finally {
+            restore_error_handler();
+        }
     }
 
     /**
@@ -350,7 +366,7 @@ trait StreamTrait
      */
     public function getMetadata($key = null)
     {
-        if (!$this->resource) {
+        if (!is_resource($this->resource)) {
             return $key ? null : [];
         }
 
@@ -360,11 +376,7 @@ trait StreamTrait
             return $metadata;
         }
 
-        if (array_key_exists($key, $metadata)) {
-            return $metadata[$key];
-        }
-
-        return null;
+        return $metadata[$key] ?? null;
     }
 
     /**
