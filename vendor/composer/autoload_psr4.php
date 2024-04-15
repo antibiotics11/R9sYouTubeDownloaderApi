@@ -10,7 +10,6 @@ return array(
     'Tnapf\\Router\\' => array($vendorDir . '/tnapf/router/src'),
     'Tests\\Tnapf\\Router\\' => array($vendorDir . '/tnapf/router/tests'),
     'Tests\\CommandString\\Utils\\' => array($vendorDir . '/commandstring/utils/tests'),
-    'RingCentral\\Psr7\\' => array($vendorDir . '/ringcentral/psr7/src'),
     'React\\Stream\\' => array($vendorDir . '/react/stream/src'),
     'React\\Socket\\' => array($vendorDir . '/react/socket/src'),
     'React\\Promise\\' => array($vendorDir . '/react/promise/src'),

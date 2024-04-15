@@ -8,7 +8,6 @@ class ComposerStaticInit5731d70f7daba58d690523ab2395b731
 {
     public static $files = array (
         'ad155f8f1cf0d418fe49e248db8c661b' => __DIR__ . '/..' . '/react/promise/src/functions_include.php',
-        'ebf8799635f67b5d7248946fe2154f4a' => __DIR__ . '/..' . '/ringcentral/psr7/src/functions_include.php',
         'c4e03ecd470d2a87804979c0a8152284' => __DIR__ . '/..' . '/react/async/src/functions_include.php',
     );
 
@@ -25,7 +24,6 @@ class ComposerStaticInit5731d70f7daba58d690523ab2395b731
         ),
         'R' => 
         array (
-            'RingCentral\\Psr7\\' => 17,
             'React\\Stream\\' => 13,
             'React\\Socket\\' => 13,
             'React\\Promise\\' => 14,
@@ -82,10 +80,6 @@ class ComposerStaticInit5731d70f7daba58d690523ab2395b731
         'Tests\\CommandString\\Utils\\' => 
         array (
             0 => __DIR__ . '/..' . '/commandstring/utils/tests',
-        ),
-        'RingCentral\\Psr7\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/ringcentral/psr7/src',
         ),
         'React\\Stream\\' => 
         array (
