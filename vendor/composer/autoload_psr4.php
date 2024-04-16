@@ -6,6 +6,8 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'antibiotics11\\PosixSignalManager\\' => array($vendorDir . '/antibiotics11/posix-signal-manager/src'),
+    'antibiotics11\\AnsiStyler\\' => array($vendorDir . '/antibiotics11/ansi-styler/src'),
     'YouTube\\' => array($vendorDir . '/athlon1600/youtube-downloader/src'),
     'Tnapf\\Router\\' => array($vendorDir . '/tnapf/router/src'),
     'Tests\\Tnapf\\Router\\' => array($vendorDir . '/tnapf/router/tests'),

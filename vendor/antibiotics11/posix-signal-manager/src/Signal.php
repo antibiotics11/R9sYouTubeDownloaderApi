@@ -1,13 +1,8 @@
 <?php
 
-namespace Room9Stone\YouTubeDownloader\Api\System\Posix;
+namespace antibiotics11\PosixSignalManager;
 
-/**
- * 이 클래스는 아래 소스에서 가져옴.
- * https://github.com/antibiotics11/PosixSignalHandler/releases/tag/v0.3
- */
-
-enum PosixSignal: int {
+enum Signal: int {
 
   /**
    * Hangup signal (SIGHUP)

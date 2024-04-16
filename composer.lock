@@ -4,8 +4,91 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5731d70f7daba58d690523ab2395b731",
+    "content-hash": "bdaa11ed91cdd263b755f96e7cdb4d10",
     "packages": [
+        {
+            "name": "antibiotics11/ansi-styler",
+            "version": "v1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/antibiotics11/ansi-styler.git",
+                "reference": "ed5ba67cb32b7b889427e9893d882fa12ac2867e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/antibiotics11/ansi-styler/zipball/ed5ba67cb32b7b889427e9893d882fa12ac2867e",
+                "reference": "ed5ba67cb32b7b889427e9893d882fa12ac2867e",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "antibiotics11\\AnsiStyler\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "ANTIBIOTICS",
+                    "email": "abx@abx.pe.kr"
+                }
+            ],
+            "description": "Utility for applying ANSI colors and text styles to console output.",
+            "support": {
+                "issues": "https://github.com/antibiotics11/ansi-styler/issues",
+                "source": "https://github.com/antibiotics11/ansi-styler/tree/v1.0"
+            },
+            "time": "2024-04-15T07:45:01+00:00"
+        },
+        {
+            "name": "antibiotics11/posix-signal-manager",
+            "version": "v1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/antibiotics11/posix-signal-manager.git",
+                "reference": "2c76d447a1cf6962147b19e32f1e49e060101de0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/antibiotics11/posix-signal-manager/zipball/2c76d447a1cf6962147b19e32f1e49e060101de0",
+                "reference": "2c76d447a1cf6962147b19e32f1e49e060101de0",
+                "shasum": ""
+            },
+            "require": {
+                "ext-pcntl": "*",
+                "ext-posix": "*",
+                "php": ">=8.1.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^11.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "antibiotics11\\PosixSignalManager\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "antibiotics11",
+                    "email": "abx@abx.pe.kr"
+                }
+            ],
+            "description": "A PHP library for POSIX signal handling.",
+            "homepage": "https://github.com/antibiotics11/posix-signal-manager",
+            "support": {
+                "issues": "https://github.com/antibiotics11/posix-signal-manager/issues",
+                "source": "https://github.com/antibiotics11/posix-signal-manager/tree/v1.1"
+            },
+            "time": "2024-04-09T08:19:57+00:00"
+        },
         {
             "name": "athlon1600/php-curl-client",
             "version": "v1.2.0",

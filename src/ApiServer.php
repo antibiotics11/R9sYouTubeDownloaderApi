@@ -8,7 +8,6 @@ use React\Socket\SocketServer;
 use React\Http\HttpServer;
 use React\Http\Middleware\LimitConcurrentRequestsMiddleware;
 use React\Http\Middleware\RequestBodyBufferMiddleware;
-use React\Http\Middleware\RequestBodyParserMiddleware;
 use React\Http\Middleware\StreamingRequestMiddleware;
 use HttpSoft\Message\StreamFactory;
 use Room9Stone\YouTubeDownloader\Api\YouTube\VideoDownloader;
@@ -19,9 +18,10 @@ use Room9Stone\YouTubeDownloader\Api\Controller\Middleware\LogMiddleware;
 use Room9Stone\YouTubeDownloader\Api\Controller\Middleware\SecurityMiddleware;
 use Room9Stone\YouTubeDownloader\Api\Controller\DefaultController;
 use Room9Stone\YouTubeDownloader\Api\Controller\VideoController;
-use Room9Stone\YouTubeDownloader\Api\System\Posix\PosixSignal;
-use Room9Stone\YouTubeDownloader\Api\System\Posix\PosixSignalHandler;
 use Room9Stone\YouTubeDownloader\Api\System\Time;
+use antibiotics11\PosixSignalManager\Signal;
+use antibiotics11\PosixSignalManager\SignalHandler;
+use antibiotics11\PosixSignalManager\SignalManager;
 use ErrorException;
 use JetBrains\PhpStorm\Immutable;
 use JetBrains\PhpStorm\ArrayShape;
@@ -58,13 +58,13 @@ class ApiServer {
     Time::setTimeZone($this->serverConfig["TIMEZONE"] ?? "GMT");
 
     // SIGHUP 시그널은 무시한다.
-    PosixSignalHandler::register(PosixSignal::SIGHUP, function () {});
+    SignalManager::getManager()->addHandler(Signal::SIGHUP, new SignalHandler(function() {}));
 
     // SIGINT, SIGTERM, SIGQUIT 시그널이 수신되면 서버를 종료한다.
-    $shutdown = [ $this, "shutdown" ];
-    PosixSignalHandler::register(PosixSignal::SIGINT, $shutdown);
-    PosixSignalHandler::register(PosixSignal::SIGTERM, $shutdown);
-    PosixSignalHandler::register(PosixSignal::SIGQUIT, $shutdown);
+    $shutdownHandler = new SignalHandler(function (): never { $this->shutdown(); });
+    SignalManager::getManager()->addHandler(Signal::SIGINT,  $shutdownHandler);
+    SignalManager::getManager()->addHandler(Signal::SIGTERM, $shutdownHandler);
+    SignalManager::getManager()->addHandler(Signal::SIGQUIT, $shutdownHandler);
 
     $logTerminal = $this->serverConfig["LOG_TERMINAL"] ?? null;
     $logFile = $this->serverConfig["LOG_FILE"] ?? null;
@@ -133,15 +133,15 @@ class ApiServer {
   /**
    * 프로세스를 종료한다.
    *
-   * @return void
+   * @return never
    */
   #[NoReturn]
-  public function shutdown(): void {
+  public function shutdown(): never {
     if ($this->isRunning) {
       ApiLogger::getInstance()->close();
       $this->isRunning = false;
-      exit(0);
     }
+    exit(0);
   }
 
   #[NoReturn]

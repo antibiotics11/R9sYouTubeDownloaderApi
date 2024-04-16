@@ -2,10 +2,10 @@
 
 namespace Room9Stone\YouTubeDownloader\Api;
 use React\Stream\WritableResourceStream;
-use Room9Stone\YouTubeDownloader\Api\System\Console\AnsiColorCode;
-use Room9Stone\YouTubeDownloader\Api\System\Console\AnsiStyler;
 use Room9Stone\YouTubeDownloader\Api\System\Time;
 use ErrorException;
+use antibiotics11\AnsiStyler\AnsiColorCode;
+use antibiotics11\AnsiStyler\AnsiFormatter as AnsiStyler;
 use JetBrains\PhpStorm\ExpectedValues;
 use JetBrains\PhpStorm\ArrayShape;
 use function sprintf;
@@ -31,6 +31,9 @@ class ApiLogger {
 
   private AnsiStyler $ansiStyler;
 
+  /**
+   * @var array<WritableResourceStream>
+   */
   #[ArrayShape([
     "consoleStream" => WritableResourceStream::class|null,
     "fileStream"    => WritableResourceStream::class|null
@@ -72,13 +75,13 @@ class ApiLogger {
   ): void {
 
     $logColor = match ($logType) {
-      "notice"  => AnsiColorCode::FOREGROUND_COLOR_BLUE,
-      "warning" => AnsiColorCode::FOREGROUND_COLOR_YELLOW,
-      "error"   => AnsiColorCode::FOREGROUND_COLOR_RED
+      "notice"  => AnsiColorCode::FOREGROUND_BLUE,
+      "warning" => AnsiColorCode::FOREGROUND_YELLOW,
+      "error"   => AnsiColorCode::FOREGROUND_RED
     };
     $log = $this->ansiStyler
       ->withColor($logColor)
-      ->generate(sprintf("[%s] %s%s", Time::DateRFC2822(), $expression, PHP_EOL));
+      ->format(sprintf("[%s] %s%s", Time::DateRFC2822(), $expression, PHP_EOL));
 
     foreach ($this->stream as $stream) {
       if ($stream instanceof WritableResourceStream && $stream->isWritable()) {

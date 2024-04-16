@@ -1,0 +1,16 @@
+{
+    "name": "antibiotics11/ansi-styler",
+    "description": "Utility for applying ANSI colors and text styles to console output.",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "antibiotics11\\AnsiStyler\\": "src/"
+        }
+    },
+    "authors": [{
+        "name": "ANTIBIOTICS",
+        "email": "abx@abx.pe.kr"
+    }],
+    "require": {}
+}

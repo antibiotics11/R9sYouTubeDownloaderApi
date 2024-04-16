@@ -12,6 +12,11 @@ class ComposerStaticInit5731d70f7daba58d690523ab2395b731
     );
 
     public static $prefixLengthsPsr4 = array (
+        'a' => 
+        array (
+            'antibiotics11\\PosixSignalManager\\' => 33,
+            'antibiotics11\\AnsiStyler\\' => 25,
+        ),
         'Y' => 
         array (
             'YouTube\\' => 8,
@@ -65,6 +70,14 @@ class ComposerStaticInit5731d70f7daba58d690523ab2395b731
     );
 
     public static $prefixDirsPsr4 = array (
+        'antibiotics11\\PosixSignalManager\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/antibiotics11/posix-signal-manager/src',
+        ),
+        'antibiotics11\\AnsiStyler\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/antibiotics11/ansi-styler/src',
+        ),
         'YouTube\\' => 
         array (
             0 => __DIR__ . '/..' . '/athlon1600/youtube-downloader/src',
