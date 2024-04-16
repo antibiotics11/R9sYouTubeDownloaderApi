@@ -21,7 +21,6 @@ use Room9Stone\YouTubeDownloader\Api\Controller\VideoController;
 use antibiotics11\PosixSignalManager\Signal;
 use antibiotics11\PosixSignalManager\SignalHandler;
 use antibiotics11\PosixSignalManager\SignalManager;
-use ErrorException;
 use JetBrains\PhpStorm\Immutable;
 use JetBrains\PhpStorm\ArrayShape;
 use JetBrains\PhpStorm\NoReturn;
@@ -35,7 +34,6 @@ class ApiServer {
 
   /**
    * @param array $serverConfig
-   * @throws ErrorException
    */
   public function __construct(
 
@@ -78,25 +76,23 @@ class ApiServer {
       [ $this, "handle" ]
     );
 
-    $this->router = new Router();
     $this->defineRoutes();
-
     $this->isRunning = true;
 
   }
 
   private function defineRoutes(): void {
 
+    $this->router    = new Router();
     $responseFactory = new ResponseFactory();
-    $streamFactory = new StreamFactory();
+    $streamFactory   = new StreamFactory();
 
-    $videoController = new VideoController($responseFactory, $streamFactory, new VideoDownloader());
-    $defaultController = new DefaultController($responseFactory, $streamFactory);
-
-    $authMiddleware = new AuthMiddleware($responseFactory, $streamFactory, $this->serverConfig["AUTH_CONFIG"]);
-    $securityMiddleware = new SecurityMiddleware($responseFactory, $streamFactory, $this->serverConfig);
+    $videoController        = new VideoController($responseFactory, $streamFactory, new VideoDownloader());
+    $defaultController      = new DefaultController($responseFactory, $streamFactory);
+    $authMiddleware         = new AuthMiddleware($responseFactory, $streamFactory, $this->serverConfig["AUTH_CONFIG"]);
+    $securityMiddleware     = new SecurityMiddleware($responseFactory, $streamFactory, $this->serverConfig);
     $globalHeaderMiddleware = new GlobalHeaderMiddleware($this->serverConfig);
-    $logMiddleware = new LogMiddleware();
+    $logMiddleware          = new LogMiddleware();
 
     $this->router->group(".*",
       function (Router $router) use ($videoController, $defaultController): void {
