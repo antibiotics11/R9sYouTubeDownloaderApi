@@ -18,7 +18,6 @@ use Room9Stone\YouTubeDownloader\Api\Controller\Middleware\LogMiddleware;
 use Room9Stone\YouTubeDownloader\Api\Controller\Middleware\SecurityMiddleware;
 use Room9Stone\YouTubeDownloader\Api\Controller\DefaultController;
 use Room9Stone\YouTubeDownloader\Api\Controller\VideoController;
-use Room9Stone\YouTubeDownloader\Api\System\Time;
 use antibiotics11\PosixSignalManager\Signal;
 use antibiotics11\PosixSignalManager\SignalHandler;
 use antibiotics11\PosixSignalManager\SignalManager;
@@ -55,7 +54,7 @@ class ApiServer {
   ) {
 
     // 프로세스의 전역 타임존을 설정한다.
-    Time::setTimeZone($this->serverConfig["TIMEZONE"] ?? "GMT");
+    ApiClock::getClock()->setTimezone($this->serverConfig["TIMEZONE"] ?? "GMT");
 
     // SIGHUP 시그널은 무시한다.
     SignalManager::getManager()->addHandler(Signal::SIGHUP, new SignalHandler(function() {}));
@@ -149,4 +148,4 @@ class ApiServer {
     $this->shutdown();
   }
 
-};
+}
